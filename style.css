@@ -1,7 +1,9 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0; background: var(--bg); color: var(--text);
+  margin: 0; color: var(--text);
+  /* Пиксельный закатный город, закреплён: страница прокручивается поверх */
+  background: var(--bg) url(img/city-bg.webp) center bottom / cover no-repeat fixed;
   font: 16px/1.55 var(--font-body);
 }
 a { color: inherit; }
@@ -25,7 +27,7 @@ a { color: inherit; }
 .hero {
   position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
   gap: 32px; padding: 32px 16px 64px;
-  background: radial-gradient(ellipse at 50% 40%, #2a2418 0%, var(--ink) 65%);
+  background: linear-gradient(to bottom, rgba(11, 11, 11, .35), rgba(11, 11, 11, .7) 55%, rgba(17, 24, 32, .95));
   border-bottom: 2px solid var(--gold-deep);
 }
 .hero-poster { display: block; width: 100%; max-width: 900px; height: auto; }
@@ -48,7 +50,7 @@ a { color: inherit; }
 .status-dot.is-online::before { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
 
 /* Секции */
-.section { padding: 80px max(16px, calc((100% - 1160px) / 2)); }
+.section { padding: 80px max(16px, calc((100% - 1160px) / 2)); background: rgba(17, 24, 32, .9); }
 .section-title {
   font: 400 clamp(26px, 4vw, 40px)/1.1 var(--font-display);
   text-transform: uppercase; margin: 0 0 36px; word-spacing: -.35em;
@@ -102,7 +104,7 @@ a { color: inherit; }
 .footer {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   padding: 28px max(16px, calc((100% - 1160px) / 2)); border-top: 1px solid var(--border);
-  color: var(--muted); font-size: 14px;
+  color: var(--muted); font-size: 14px; background: rgba(11, 11, 11, .92);
 }
 .footer-logo { font-size: 18px; display: flex; gap: .3em; }
 .footer-logo b { display: inline; }
@@ -156,7 +158,7 @@ a { color: inherit; }
   .side-left { left: 0; }
   .side-right { right: 0; }
   main, .footer { position: relative; z-index: 1; max-width: var(--content); margin: 0 auto; }
-  main { background: var(--bg); box-shadow: 0 0 60px 20px rgba(0, 0, 0, .55); }
+  main { box-shadow: 0 0 60px 20px rgba(0, 0, 0, .45); }
   .section, .footer { padding-left: 40px; padding-right: 40px; }
   .hero { min-height: calc(100vh - 62px); justify-content: center; padding: 56px 40px 72px; }
   .hero-poster { display: none; }
