@@ -2,8 +2,8 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0; color: var(--text);
-  /* Пиксельный закатный город, закреплён: страница прокручивается поверх */
-  background: var(--bg) url(img/city-bg.webp) center bottom / cover no-repeat fixed;
+  /* Арт с персонажами и городом закреплён, страница прокручивается поверх */
+  background: #5d6ba3 url(img/bg-full.webp) center bottom / cover no-repeat fixed;
   font: 16px/1.55 var(--font-body);
 }
 a { color: inherit; }
@@ -23,20 +23,17 @@ a { color: inherit; }
 .topbar-nav a:hover { color: var(--gold); }
 .topbar-cta { padding: 10px 18px; font-size: 13px; }
 
-/* Первый экран: на узком экране постер целиком, на широком персонажи стоят по бокам страницы */
+/* Первый экран: прозрачный, на фоне арта */
 .hero {
-  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: 32px; padding: 32px 16px 64px;
-  background: linear-gradient(to bottom, rgba(11, 11, 11, .35), rgba(11, 11, 11, .7) 55%, rgba(17, 24, 32, .95));
-  border-bottom: 2px solid var(--gold-deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  min-height: calc(100vh - 62px); padding: 48px 16px 72px;
 }
-.hero-poster { display: block; width: 100%; max-width: 900px; height: auto; }
-.hero-copy { position: relative; z-index: 1; max-width: 520px; }
+.hero-copy { max-width: 560px; padding: 28px 24px; background: radial-gradient(closest-side, rgba(11, 11, 11, .5), rgba(11, 11, 11, .25) 70%, transparent); border-radius: 50%; }
 .hero-copy .hero-lead { margin-left: auto; margin-right: auto; }
 .hero-copy .hero-actions, .hero-copy .hero-status { justify-content: center; }
-
-/* Персонажи по бокам: закреплены, страница прокручивается между ними */
-.side { display: none; }
+.hero-lead, .hero-note, .hero-status { text-shadow: 0 1px 2px #000, 0 0 14px rgba(0, 0, 0, .7); }
+.hero-lead { color: #fff; font-weight: 600; }
+.hero-note, .hero-status dt { color: #e8e2d0; }
 .hero-logo { font-size: clamp(64px, 9vw, 120px); margin: 0 0 18px; }
 .hero-lead { color: var(--paper); font-size: 18px; max-width: 34ch; margin: 0 0 28px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -50,18 +47,18 @@ a { color: inherit; }
 .status-dot.is-online::before { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
 
 /* Секции */
-.section { padding: 80px max(16px, calc((100% - 1160px) / 2)); background: rgba(17, 24, 32, .9); }
+.section { padding: 80px max(16px, calc((100% - 1160px) / 2)); }
 .section-title {
   font: 400 clamp(26px, 4vw, 40px)/1.1 var(--font-display);
   text-transform: uppercase; margin: 0 0 36px; word-spacing: -.35em;
+  text-shadow: 3px 3px 0 var(--ink), 0 0 18px rgba(0, 0, 0, .55);
 }
 .section-title span { color: var(--gold); }
-.section-paper { background: var(--paper); color: var(--ink); }
-.section-paper .section-title span { color: var(--orange); }
+
 
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  background: rgba(17, 24, 32, .82); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 24px; transition: border-color .15s, transform .15s;
 }
 .card:hover { border-color: var(--gold); transform: translateY(-3px); }
@@ -74,7 +71,7 @@ a { color: inherit; }
 
 .steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .steps li {
-  counter-increment: s; position: relative; background: #fff8e6;
+  counter-increment: s; position: relative; background: #fff8e6; color: var(--ink);
   border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-hard);
   padding: 56px 20px 22px;
 }
@@ -86,17 +83,17 @@ a { color: inherit; }
 .steps span { color: #4a4436; }
 
 .donate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.donate-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
+.donate-card { background: rgba(17, 24, 32, .82); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
 .donate-card h3 { margin: 0 0 6px; }
 .donate-card p { margin: 0; color: var(--muted); }
 .donate-card .price { font: 28px/1.2 var(--font-display); color: var(--text); margin: 10px 0; }
 .donate-card .price small { font: 600 14px var(--font-body); color: var(--muted); }
-.donate-card-accent { background: linear-gradient(160deg, #3a2f17, var(--surface) 70%); border-color: var(--gold-deep); }
+.donate-card-accent { background: linear-gradient(160deg, rgba(58, 47, 23, .9), rgba(17, 24, 32, .8) 70%); border-color: var(--gold-deep); }
 .donate-card-accent .price { color: var(--gold); }
-.note { color: var(--muted); font-size: 14px; margin: 18px 0 0; }
+.note { color: #e8e2d0; font-size: 14px; margin: 18px 0 0; text-shadow: 0 1px 2px #000, 0 0 10px rgba(0, 0, 0, .8); }
 
 .faq { display: grid; gap: 10px; max-width: 780px; }
-.faq details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; }
+.faq details { background: rgba(17, 24, 32, .82); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; }
 .faq summary { cursor: pointer; font-weight: 800; }
 .faq summary::marker { color: var(--gold); }
 .faq p { color: var(--muted); margin: 10px 0 0; }
@@ -104,7 +101,7 @@ a { color: inherit; }
 .footer {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   padding: 28px max(16px, calc((100% - 1160px) / 2)); border-top: 1px solid var(--border);
-  color: var(--muted); font-size: 14px; background: rgba(11, 11, 11, .92);
+  color: var(--muted); font-size: 14px; background: rgba(17, 24, 32, .85);
 }
 .footer-logo { font-size: 18px; display: flex; gap: .3em; }
 .footer-logo b { display: inline; }
@@ -126,13 +123,13 @@ a { color: inherit; }
 .status-dot.is-cbt::before { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
 .cbt {
   display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
-  background: var(--surface); border: 1px solid var(--gold-deep); border-radius: var(--radius); padding: 28px;
+  background: rgba(17, 24, 32, .82); border: 1px solid var(--gold-deep); border-radius: var(--radius); padding: 28px;
 }
 .cbt p { margin: 0; color: #d6dde4; max-width: 62ch; }
 .cbt code, .faq code { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: .9em; }
 .cbt-links { display: flex; gap: 12px; flex-wrap: wrap; }
 .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
-.news-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.news-card { background: rgba(17, 24, 32, .82); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
 .news-card h3 { margin: 10px 0 8px; font-size: 20px; }
 .news-card p { margin: 0 0 8px; color: var(--muted); }
 .news-card .news-lead { color: var(--paper); font-weight: 600; }
@@ -145,21 +142,21 @@ a { color: inherit; }
   .footer-nav { margin-left: 0; }
 }
 
-/* Широкий экран: персонажи закреплены по бокам, страница прокручивается между ними */
-@media (min-width: 1360px) {
-  :root { --content: 960px; --side: calc((100vw - var(--content)) / 2); }
-  .side {
-    display: flex; align-items: flex-end; justify-content: center;
-    position: fixed; bottom: 0; z-index: 0; pointer-events: none;
-    width: calc(var(--side) + 60px); height: 100vh;
-    background: radial-gradient(ellipse 60% 45% at 50% 78%, rgba(223, 187, 107, .16), transparent 70%);
+/* Широкий экран: арт по ширине окна, низом к низу — персонажи по краям не обрезаются;
+   над ним небо продолжается цветом верхнего края картинки */
+@media (min-aspect-ratio: 8/5) {
+  body {
+    background:
+      linear-gradient(to bottom, #4f5d97 0, #6070a6 calc(100vh - 40vw), rgba(96, 112, 166, 0) calc(100vh - 40vw + 120px)) top / 100% 100vh no-repeat fixed,
+      url(img/bg-full.webp) center bottom / 100% auto no-repeat fixed,
+      #4f5d97;
   }
-  .side img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(84vh, 900px); }
-  .side-left { left: 0; }
-  .side-right { right: 0; }
-  main, .footer { position: relative; z-index: 1; max-width: var(--content); margin: 0 auto; }
-  main { box-shadow: 0 0 60px 20px rgba(0, 0, 0, .45); }
-  .section, .footer { padding-left: 40px; padding-right: 40px; }
-  .hero { min-height: calc(100vh - 62px); justify-content: center; padding: 56px 40px 72px; }
-  .hero-poster { display: none; }
+}
+/* Центр страницы между персонажами */
+@media (min-width: 1200px) {
+  :root { --content: min(960px, 54vw); }
+  main, .footer { max-width: var(--content); margin: 0 auto; }
+  .section, .footer { padding-left: 24px; padding-right: 24px; }
+  .cards, .donate { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .steps { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 }
