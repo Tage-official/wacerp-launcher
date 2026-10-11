@@ -143,24 +143,18 @@ a { color: inherit; }
   .footer-nav { margin-left: 0; }
 }
 
-/* Широкий экран: персонажи закреплены по бокам */
+/* Широкий экран: персонажи закреплены по бокам, страница прокручивается между ними */
 @media (min-width: 1360px) {
-  :root { --content: 960px; }
+  :root { --content: 960px; --side: calc((100vw - var(--content)) / 2); }
   .side {
-    display: block; position: fixed; top: 0; bottom: 0; z-index: 0;
-    width: calc((100vw - var(--content)) / 2 + 40px);
-    background-size: cover; background-repeat: no-repeat;
+    display: flex; align-items: flex-end; justify-content: center;
+    position: fixed; bottom: 0; z-index: 0; pointer-events: none;
+    width: calc(var(--side) + 60px); height: 100vh;
+    background: radial-gradient(ellipse 60% 45% at 50% 78%, rgba(223, 187, 107, .16), transparent 70%);
   }
-  .side-left {
-    left: 0; background-image: url(img/side-left.webp); background-position: 52% center;
-    -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
-    mask-image: linear-gradient(to right, #000 70%, transparent);
-  }
-  .side-right {
-    right: 0; background-image: url(img/side-right.webp); background-position: 38% center;
-    -webkit-mask-image: linear-gradient(to left, #000 70%, transparent);
-    mask-image: linear-gradient(to left, #000 70%, transparent);
-  }
+  .side img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(84vh, 900px); }
+  .side-left { left: 0; }
+  .side-right { right: 0; }
   main, .footer { position: relative; z-index: 1; max-width: var(--content); margin: 0 auto; }
   main { background: var(--bg); box-shadow: 0 0 60px 20px rgba(0, 0, 0, .55); }
   .section, .footer { padding-left: 40px; padding-right: 40px; }
