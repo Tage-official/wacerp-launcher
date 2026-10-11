@@ -21,22 +21,20 @@ a { color: inherit; }
 .topbar-nav a:hover { color: var(--gold); }
 .topbar-cta { padding: 10px 18px; font-size: 13px; }
 
-/* Первый экран: текст по центру, персонажи постера по краям окна */
+/* Первый экран: на узком экране постер целиком, на широком персонажи стоят по бокам страницы */
 .hero {
-  position: relative; overflow: hidden;
-  display: flex; justify-content: center; align-items: center; text-align: center;
-  min-height: clamp(560px, 80vh, 780px);
-  padding: 56px 16px 72px;
-  background: radial-gradient(ellipse at 50% 45%, #2a2418 0%, var(--ink) 62%);
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 32px; padding: 32px 16px 64px;
+  background: radial-gradient(ellipse at 50% 40%, #2a2418 0%, var(--ink) 65%);
   border-bottom: 2px solid var(--gold-deep);
 }
-.hero-chars { position: absolute; inset: 0; pointer-events: none; }
-.hero-char { position: absolute; bottom: 0; height: clamp(300px, 36vw, 700px); width: auto; }
-.hero-char-left { left: 0; }
-.hero-char-right { right: 0; }
-.hero-copy { position: relative; z-index: 1; max-width: 480px; }
+.hero-poster { display: block; width: 100%; max-width: 900px; height: auto; }
+.hero-copy { position: relative; z-index: 1; max-width: 520px; }
 .hero-copy .hero-lead { margin-left: auto; margin-right: auto; }
 .hero-copy .hero-actions, .hero-copy .hero-status { justify-content: center; }
+
+/* Персонажи по бокам: закреплены, страница прокручивается между ними */
+.side { display: none; }
 .hero-logo { font-size: clamp(64px, 9vw, 120px); margin: 0 0 18px; }
 .hero-lead { color: var(--paper); font-size: 18px; max-width: 34ch; margin: 0 0 28px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -111,10 +109,6 @@ a { color: inherit; }
 .footer p { margin: 0; }
 
 @media (max-width: 900px) {
-  .hero { flex-direction: column; min-height: 0; padding: 32px 0 0; }
-  .hero-copy { padding: 0 16px 24px; }
-  .hero-chars { position: static; display: flex; justify-content: space-between; align-items: flex-end; width: 100%; order: 2; }
-  .hero-char { position: static; height: auto; width: 46%; max-width: 340px; }
   .cards, .donate { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
   .topbar-nav { display: none; }
@@ -147,4 +141,29 @@ a { color: inherit; }
 @media (max-width: 900px) {
   .cbt { grid-template-columns: 1fr; }
   .footer-nav { margin-left: 0; }
+}
+
+/* Широкий экран: персонажи закреплены по бокам */
+@media (min-width: 1360px) {
+  :root { --content: 960px; }
+  .side {
+    display: block; position: fixed; top: 0; bottom: 0; z-index: 0;
+    width: calc((100vw - var(--content)) / 2 + 40px);
+    background-size: cover; background-repeat: no-repeat;
+  }
+  .side-left {
+    left: 0; background-image: url(img/side-left.webp); background-position: 52% center;
+    -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
+    mask-image: linear-gradient(to right, #000 70%, transparent);
+  }
+  .side-right {
+    right: 0; background-image: url(img/side-right.webp); background-position: 38% center;
+    -webkit-mask-image: linear-gradient(to left, #000 70%, transparent);
+    mask-image: linear-gradient(to left, #000 70%, transparent);
+  }
+  main, .footer { position: relative; z-index: 1; max-width: var(--content); margin: 0 auto; }
+  main { background: var(--bg); box-shadow: 0 0 60px 20px rgba(0, 0, 0, .55); }
+  .section, .footer { padding-left: 40px; padding-right: 40px; }
+  .hero { min-height: calc(100vh - 62px); justify-content: center; padding: 56px 40px 72px; }
+  .hero-poster { display: none; }
 }
