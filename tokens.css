@@ -1,0 +1,54 @@
+/* Общая тема Wace RP для сайта и лаунчера.
+   Тёмные цвета и золото совпадают с RpUi.kt, бежевый и чёрный взяты с постеров меню. */
+:root {
+  --bg: #111820;          /* RpUi.BG */
+  --surface: #1a2430;     /* RpUi.SURFACE */
+  --hover: #283949;       /* RpUi.HOVER */
+  --border: #30404e;      /* RpUi.BORDER */
+  --text: #ffffff;
+  --muted: #a0adba;       /* RpUi.MUTED */
+  --gold: #dfbb6b;        /* RpUi.GOLD */
+  --gold-deep: #b8923f;
+  --error: #ff8585;
+  --ok: #7fd18b;
+  --paper: #e9dfc2;       /* фон постера загрузки */
+  --paper-dark: #cbbd98;
+  --ink: #0b0b0b;         /* контур логотипа и рамки */
+  --orange: #c8641e;
+
+  --font-display: "Rubik Mono One", "Arial Black", sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+
+  --radius: 6px;
+  --shadow-hard: 4px 4px 0 var(--ink);
+}
+
+/* Логотип в стиле постера: белые буквы с толстым чёрным контуром. */
+.wace-logo {
+  font-family: var(--font-display);
+  color: #fff;
+  line-height: .9;
+  letter-spacing: .02em;
+  -webkit-text-stroke: .14em var(--ink);
+  paint-order: stroke fill;
+  text-shadow: .06em .06em 0 var(--ink);
+  text-transform: lowercase;
+  user-select: none;
+}
+.wace-logo { word-spacing: -.3em; }
+.wace-logo b { display: block; text-transform: uppercase; font-weight: inherit; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  font: 800 15px/1 var(--font-body);
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 14px 22px; border-radius: var(--radius);
+  border: 2px solid var(--ink); cursor: pointer; text-decoration: none;
+  transition: transform .08s, box-shadow .08s, background .15s;
+}
+.btn-gold { background: var(--gold); color: var(--ink); box-shadow: var(--shadow-hard); }
+.btn-gold:hover { background: #ebca80; }
+.btn-gold:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn-dark { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn-dark:hover { background: var(--hover); }
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
